@@ -1,0 +1,34 @@
+# Node & Frontend
+node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+
+# Python & Backend
+backend/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+backend/app/__pycache__/
+
+# Base de datos local (visto en backend/vision_ai.db)
+*.db
+*.sqlite3
+backend/*.db
+backend/*.sqlite3
+
+# Modelos de pesos de IA (Evita subir yolov8n.pt y cualquier .pt local)
+*.pt
+backend/*.pt
+backend/models/*.pt
+
+# Entornos y secretos
+.env
+backend/.env
+frontend/.env
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
