@@ -13,8 +13,18 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title='VISION AI API', version='1.0.0', description='API de persistencia y gestión de VISION AI')
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:5174', 'http://127.0.0.1:5174', 'http://localhost:4173', 'http://127.0.0.1:4173'],
-    allow_credentials=True, allow_methods=['*'], allow_headers=['*'],
+    allow_origins=[
+        'http://localhost:5173/', 
+        'http://127.0.0.1:5173/', 
+        'http://localhost:5174/', 
+        'http://127.0.0.1:5174/', 
+        'http://localhost:4173/', 
+        'http://127.0.0.1:4173/',
+        'https://vision-ia-five.vercel.app/'  # <--- ¡Añade tu dominio de Vercel aquí!
+    ],
+    allow_credentials=True, 
+    allow_methods=[''], 
+    allow_headers=[''],
 )
 
 def get_db():
