@@ -94,7 +94,8 @@ export default function AnalysisPage({ store, user, onRun, notify }: AnalysisPag
       setCameraOn(true);
       setWsStatus('connecting');
 
-      const configuredApi = (import.meta as any).env?.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
+      // Actualizado para apuntar directamente a Render por defecto si no hay variable de entorno
+      const configuredApi = (import.meta as any).env?.VITE_API_URL || 'https://visionia-4111.onrender.com/api/v1';
       const apiBase = configuredApi.replace(/\/api\/v1\/?$/, '');
       const wsUrl = apiBase.replace(/^http/, 'ws') + '/api/v1/vision/stream';
       const ws = new WebSocket(wsUrl);
@@ -152,7 +153,7 @@ export default function AnalysisPage({ store, user, onRun, notify }: AnalysisPag
       ws.send(JSON.stringify({ 
         frame: data, 
         confidence: threshold / 100, 
-        scenario: scenarioId // <--- ¡AQUÍ ESTÁ LA CLAVE! Enviamos el escenario activo
+        scenario: scenarioId 
       }));
     }, 100);
     return () => { if (timerRef.current) window.clearInterval(timerRef.current); };
@@ -238,7 +239,6 @@ export default function AnalysisPage({ store, user, onRun, notify }: AnalysisPag
           <small>Procesamiento en backend · FastAPI + OpenCV + YOLO</small>
         </div>
         <div className="camera-actions">
-          {/* Selector de escenarios dinámico */}
           <select value={scenarioId} onChange={e => setScenarioId(e.target.value)}>
             {store.scenarios.map((sc: any) => (
               <option key={sc.id} value={sc.id}>{sc.name}</option>
